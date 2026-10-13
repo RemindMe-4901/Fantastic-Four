@@ -14,7 +14,7 @@ login.addEventListener("submit", async function(event) {
 
   try {
     await signInWithEmailAndPassword(auth, email, password);
-    message.textContent = "Login successful!";
+    message.textContent = "Login successful.";
   } catch (error) {
     message.textContent = "Login failed: " + error.message;
   }
