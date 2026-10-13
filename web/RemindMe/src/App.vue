@@ -1,11 +1,7 @@
-<script setup></script>
+<script setup>
+import Tasks from "./component/Tasks.vue";
+</script>
 
 <template>
-  <h1>Hello World!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <Tasks />
 </template>
-
-<style scoped></style>
