@@ -1,5 +1,5 @@
 <script setup>
-import Tasks from "./component/Tasks.vue";
+//import Tasks from "./component/Tasks.vue";
 //import Home from ""
 </script>
 
@@ -9,10 +9,11 @@ import Tasks from "./component/Tasks.vue";
   <nav>
     <router-link to="/">home</router-link> |
     <router-link to="/createAccount">createAccount</router-link> |
-    <router-link to="/Login">Login</router-link>
+    <router-link to="/Login">Login</router-link> |
+    <router-link to="/Task">Task</router-link>
   </nav>
 
-  <!--SOMETHING IS HERE--> 
+  <!--<Tasks />--> 
   <Tasks />
   <router-view></router-view>
   </div>
