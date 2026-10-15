@@ -29,6 +29,7 @@ async function createHabit() {
 
     newHabit.value = "";
     await loadHabits();
+    alert("Habit added successfully!");
   } catch (error) {
     console.error("Error creating habit:", error);
   }
@@ -50,6 +51,7 @@ async function removeHabit(habitId) {
   try {
     await deleteHabit(habitId);
     await loadHabits();
+    alert("Habit removed successfully!");
   } catch (error) {
     console.error("Error deleting habit:", error);
   }
