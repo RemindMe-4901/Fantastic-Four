@@ -1,18 +1,26 @@
 <script setup>
 import { ref } from 'vue'
+import { loginUser } from "./LogIn.js";
 
-const email = ref('')
-const password = ref('')
+const email = ref("");
+const password = ref("");
+const message = ref("");
 
-    function handleLogin() {
-        if(!email.value || !password.value) {
-            alert('Enter email and password.')
-            return
-        }
-
-        console.log('Login sent:', email.value)
+async function handleLogin() {
+    if (!email.value || !password.value) {
+        message.value = "Enter email and password.";
+        return;
     }
 
+    message.value = "Logging in.";
+
+    try {
+        await loginUser(email.value, password.value);
+        message.value = "Login successful.";
+    } catch (error) {
+        message.value = "Login failed: " + error.message;
+    }
+}
 </script>
 
 <template>
