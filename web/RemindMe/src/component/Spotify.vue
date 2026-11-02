@@ -54,7 +54,7 @@ function clear() {
       :src="embedUrl"
       width="100%"
       height="352"
-      frameborder="0"
+      frameborder="2"
       allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
       loading="lazy"
       style="border-radius: 12px"
