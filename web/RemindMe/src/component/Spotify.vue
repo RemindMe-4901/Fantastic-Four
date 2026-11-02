@@ -19,7 +19,7 @@ const embedUrl = computed(() =>
 function save() {
   const id = extractId(input.value);
   if (!id) {
-    alert("That doesn't look like a Spotify playlist link.");
+    alert("That is not a Spotify playlist link...");
     return;
   }
   playlistId.value = id;
