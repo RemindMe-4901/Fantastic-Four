@@ -1,6 +1,10 @@
 <script setup>
 import { ref, computed } from "vue";
 
+const props = defineProps({
+  compact: { type: Boolean, default: false },
+});
+
 const saved = localStorage.getItem("remindme_playlist");
 const input = ref(saved || "");
 const playlistId = ref(saved ? extractId(saved) : "");
@@ -19,7 +23,7 @@ const embedUrl = computed(() =>
 function save() {
   const id = extractId(input.value);
   if (!id) {
-    alert("That is not a Spotify playlist link...");
+    alert("That is not a Spotify playlist link.");
     return;
   }
   playlistId.value = id;
@@ -34,30 +38,28 @@ function clear() {
 </script>
 
 <template>
-  <div class="card p-3 mb-3">
-    <h2 class="h5">Focus playlist</h2>
 
-    <div class="input-group mb-2">
-      <input
-        v-model="input"
-        class="form-control"
-        placeholder="Paste a Spotify playlist link"
-      />
-      <button class="btn btn-success" @click="save">Save</button>
-      <button v-if="playlistId" class="btn btn-outline-secondary" @click="clear">
-        Clear
-      </button>
-    </div>
+  <div :class="compact ? '' : 'card p-3 mb-3'">
+    <template v-if="!compact">
+      <h2 class="h5">Spotify Playlist</h2>
+      <div class="input-group mb-2">
+        <input v-model="input" class="form-control" placeholder="Paste a Spotify playlist link" />
+        <button class="btn btn-success" @click="save">Save</button>
+        <button v-if="playlistId" class="btn btn-outline-secondary" @click="clear">Clear</button>
+      </div>
+
+    </template>
 
     <iframe
       v-if="embedUrl"
       :src="embedUrl"
       width="100%"
-      height="352"
-      frameborder="2"
+      :height="compact ? 152 : 600"
+      frameborder="4"
       allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
       loading="lazy"
       style="border-radius: 12px"
     ></iframe>
   </div>
+
 </template>
