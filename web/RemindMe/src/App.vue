@@ -45,4 +45,4 @@ import { RouterLink, RouterView } from "vue-router";
     display: none;
   }
 }
-
+</style>
