@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { getTasks, updateTask, deleteTask } from "../tasks.js";
+import Spotify from "./Spotify.vue";
 
 const tasks = ref([]);
 
