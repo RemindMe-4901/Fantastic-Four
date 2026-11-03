@@ -5,26 +5,11 @@ import LoginView from '../views/LoginView.vue'
 import TaskView from '../views/TaskView.vue'
 
 const routes = [
-    {
-        path: '/',
-        name: 'home',
-        component: HomeView
-    },
-    {
-        path: '/createAccount',
-        name: 'createAccount',
-        component: cAccountView
-    },
-    {
-        path: '/Login',
-        name: 'Login',
-        component: LoginView
-    },
-    {
-        path: '/Task',
-        name: 'Task',
-        component: TaskView
-    }
+  { path: '/', name: 'home', component: HomeView },
+  { path: '/createAccount', name: 'createAccount', component: cAccountView },
+  { path: '/Login', name: 'Login', component: LoginView },
+  { path: '/Task', name: 'Task', component: TaskView },
+  { path: '/spotify', name: 'spotify', component: Spotify },
 ]
 
 const router = createRouter({
