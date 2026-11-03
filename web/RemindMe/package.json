@@ -12,7 +12,8 @@
     "bootstrap": "^5.3.8",
     "bootstrap-vue-next": "^1.2.2",
     "firebase": "^13.0.0",
-    "vue": "^3.5.42"
+    "vue": "^3.5.42",
+    "vue-router": "^5.4.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.8",
