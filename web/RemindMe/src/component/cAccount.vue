@@ -17,8 +17,8 @@ async function handleCreate() {
     const { account, error } = await createUserAccount(email.value, password.value);
 
     if (error){
-        errorAccount = error;
-    } else if (user){
+        errorAccount.value = error;
+    } else if (account){
         successAccount.value = "Your account has been created!"
         router.push('/');
     }
@@ -57,8 +57,8 @@ async function handleCreate() {
             <button type = "submit">Create Account</button>
         </form>
 
-        <p v-if = "errorAccount" class="error"> { errorAccount} </p>
-        <p v-if = "successAccount" class="success"> { successAccount} </p>
+        <p v-if = "errorAccount" class="error"> {{ errorAccount}} </p>
+        <p v-if = "successAccount" class="success"> {{ successAccount}} </p>
 
     </div>
 
