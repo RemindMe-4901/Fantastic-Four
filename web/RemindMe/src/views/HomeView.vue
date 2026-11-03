@@ -1,3 +1,7 @@
+<script setup>
+import Spotify from '@/component/Spotify.vue';
+</script>
+
 <template>
     <div>
         <h1>
