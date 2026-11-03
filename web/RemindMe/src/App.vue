@@ -7,16 +7,16 @@ import Spotify from "./component/Spotify.vue";
 <template>
   <div id="app">
 
+  <!--<nav v-if="!$router.meta.hideNavBar" class = "navBar"> -->
   <nav>
-    <router-link to="/">home</router-link> |
-    <router-link to="/createAccount">createAccount</router-link> |
-    <router-link to="/Login">Login</router-link> |
-    <router-link to="/Task">Task</router-link>
+    <router-link to="/home">Home</router-link> | 
+    <router-link to="/Task">Tasks</router-link> |
+    <router-link to="/Habit">Habit</router-link> |
     <router-link to="/Spotify">Spotify</router-link>
   </nav>
 
-  <!--<Tasks />--> 
-  <Tasks />
+  <!--   --> 
+  <!--<Tasks /> <-- dont remember why I had this here to begin with, maybe need it??-->
   <router-view></router-view>
   </div>
 </template>

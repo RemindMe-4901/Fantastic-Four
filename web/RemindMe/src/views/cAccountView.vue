@@ -1,10 +1,7 @@
-<template>
-    <div>
-        <h1>
-            CREATE ACCOUNT
-            <p1>
-                this is where you will create your account
-            </p1>
-        </h1>
-    </div>
+<script setup>
+import cAccount from '@/component/cAccount.vue';
+</script>
+
+<template >
+    <cAccount/>
 </template>

@@ -1,8 +1,7 @@
-#<template ><div>
-        <h1>
-            LOGIN
-            <p1>
-                this is where you will login
-            </p1>
-        </h1>
-    </div></template>
+<script setup>
+import Login from '@/component/LogIn.vue';
+</script>
+
+<template >
+    <Login/>
+</template>
