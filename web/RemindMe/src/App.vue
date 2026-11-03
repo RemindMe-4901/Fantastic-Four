@@ -1,6 +1,7 @@
 <script setup>
 //import Tasks from "./component/Tasks.vue";
 //import Home from ""
+import Spotify from "./component/Spotify.vue";
 </script>
 
 <template>
@@ -11,6 +12,7 @@
     <router-link to="/createAccount">createAccount</router-link> |
     <router-link to="/Login">Login</router-link> |
     <router-link to="/Task">Task</router-link>
+    <router-link to="/Spotify">Spotify</router-link>
   </nav>
 
   <!--<Tasks />--> 
