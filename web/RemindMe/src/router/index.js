@@ -4,11 +4,13 @@ import cAccountView from '../views/cAccountView.vue'
 import LoginView from '../views/LoginView.vue'
 import TaskView from '../views/TaskView.vue'
 import HabitView from '../views/HabitView.vue'
+import TimerSessionView from '../views/TimerSessionView.vue'
 import SpotifyView from '../views/SpotifyView.vue'
 
 const routes = [
     { path: '/', name: 'Login', component: LoginView, meta: {hideNavBar: true}},
     { path: '/Home', name: 'home', component: HomeView },
+    { path: '/TimerSession', name: 'timer', component: TimerSessionView },
     //{ path: '/', name: 'home', component: HomeView },
     { path: '/createAccount', name: 'createAccount', component: cAccountView, meta: {hideNavBar: true} },
     //{ path: '/Login', name: 'Login', component: LoginView },

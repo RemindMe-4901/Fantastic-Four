@@ -29,7 +29,7 @@ async function handleLogin() {
         <h1>Welcome to ReadMe</h1>
         <h2>Login to your ReadMe account</h2>
 
-        <form @submit.prevent = "Login">
+        <form @submit.prevent = "handleLogin">
             <label for = "email">Email:</label>
             <input
                 id = "email"

@@ -12,6 +12,7 @@ import Spotify from "./component/Spotify.vue";
     <router-link to="/home">Home</router-link> | 
     <router-link to="/Task">Tasks</router-link> |
     <router-link to="/Habit">Habit</router-link> |
+    <router-link to="/TimerSession">Timer</router-link> |
     <router-link to="/Spotify">Spotify</router-link>
   </nav>
 
