@@ -1,9 +1,10 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import { getTasks, updateTask, deleteTask } from "../tasks.js";
+import { addTask, getTasks, updateTask, deleteTask } from "../tasks.js";
 import Spotify from "./Spotify.vue";
 
 const tasks = ref([]);
+const newTask = ref("");
 
 async function loadTasks() {
   try {
@@ -12,7 +13,24 @@ async function loadTasks() {
     console.error("Error loading tasks:", error);
   }
 }
+async function createTask() {
+  if (!newTask.value.trim()) {
+    alert("Please enter a task name.");
+    return;
+  }
 
+  try {
+    await addTask({
+      title: newTask.value.trim(),
+      completed: false
+    });
+
+    newTask.value = "";
+    await loadTasks();
+  } catch (error) {
+    console.error("Error creating task:", error);
+  }
+}
 async function markComplete(taskId) {
   try {
     await updateTask(taskId, { completed: true });
@@ -39,7 +57,15 @@ onMounted(() => {
 <template>
   <div>
     <h1>Tasks</h1>
+<input
+  v-model="newTask"
+  type="text"
+  placeholder="Enter task name"
+/>
 
+<button @click="createTask">
+  Add Task
+</button>
     <ul>
       <li v-for="task in tasks" :key="task.id">
         {{ task.title }} -
