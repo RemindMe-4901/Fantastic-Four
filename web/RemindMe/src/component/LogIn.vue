@@ -1,10 +1,14 @@
 <script setup>
-import { ref } from 'vue'
+import { ref } from 'vue';
 import { loginUser } from "../api/LogIn.js";
+import { useRouter, useRoute } from 'vue-router';
 
 const email = ref("");
 const password = ref("");
 const message = ref("");
+
+const router = useRouter();
+const route = useRoute();
 
 async function handleLogin() {
     if (!email.value || !password.value) {
@@ -15,9 +19,9 @@ async function handleLogin() {
     message.value = "Logging in.";
 
     try {
-        await loginUser(email.value, password.value);
-        message.value = "Login successful.";
-        router.push('/home');
+        const test = await loginUser(email.value, password.value);
+        sessionStorage.setItem("userInfo", test.user.uid);
+        router.push( route.query.redirect || '/Home');
     } catch (error) {
         message.value = "Login failed: " + error.message;
     }

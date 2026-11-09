@@ -1,26 +1,29 @@
 <script setup>
 import { ref } from 'vue'
 import { createUserAccount } from "../api/cAccount.js";
-//import useRouter from 'vue-router';
+import { useRouter } from 'vue-router';
 
 const email = ref("");
 const password = ref("");
-const errorAccount = ref("");
-const successAccount = ref("");
-//const router = useRouter()
+const errorAccount = ref();
+const router = useRouter()
 
 
 async function handleCreate() {
     errorAccount.value = "";
-    successAccount.value = "";
 
-    const { account, error } = await createUserAccount(email.value, password.value);
+    try {
+    const { user, userCredential } = await createUserAccount(email.value, password.value);
 
-    if (error){
-        errorAccount.value = error;
-    } else if (account){
-        successAccount.value = "Your account has been created!"
+    console.log("here", user, userCredential)
+
+    if (user){
         router.push('/');
+    }
+    }
+    catch(e){
+        errorAccount.value = e.message;
+        
     }
 
 }
@@ -54,12 +57,25 @@ async function handleCreate() {
                 />
             </div>
 
-            <button type = "submit">Create Account</button>
+            <button class="btn btn-primary" type="submit">Create Account</button>
+            
+            <router-link to="/" custom v-slot="{ navigate }">
+                <button @click="navigate" class="btn btn-secondary" type="button">
+                    Back to Login
+                </button>
+            </router-link>
+        
+        
         </form>
 
-        <p v-if = "errorAccount" class="error"> {{ errorAccount}} </p>
-        <p v-if = "successAccount" class="success"> {{ successAccount}} </p>
-
+        <BModal
+            v-model="errorAccount"
+            id="modal-center"
+            centered
+            title="Create account error"
+            >
+            <p class="my-4">{{ errorAccount}}</p>
+        </BModal>
     </div>
 
 
@@ -73,10 +89,6 @@ async function handleCreate() {
 
     .error {
         color : "red"
-    }
-
-    .success{
-        color: "green"
     }
 
 </style>

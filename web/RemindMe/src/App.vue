@@ -2,13 +2,17 @@
 //import Tasks from "./component/Tasks.vue";
 //import Home from ""
 import Spotify from "./component/Spotify.vue";
+import { BApp } from "bootstrap-vue-next";
+import {useRoute} from "vue-router"
+
+const route = useRoute();
 </script>
 
 <template>
-  <div id="app">
+  <BApp id="app">
 
-  <!--<nav v-if="!$router.meta.hideNavBar" class = "navBar"> -->
-  <nav>
+  <!--<nav v-if="!$route.meta.hideNavBar" class = "navBar"> -->
+  <nav v-if= "route.meta.showNavBar != false">
     <router-link to="/home">Home</router-link> | 
     <router-link to="/Task">Tasks</router-link> |
     <router-link to="/Habit">Habit</router-link> |
@@ -19,7 +23,7 @@ import Spotify from "./component/Spotify.vue";
   <!--   --> 
   <!--<Tasks /> <-- dont remember why I had this here to begin with, maybe need it??-->
   <router-view></router-view>
-  </div>
+</BApp>
 </template>
 
 <style>
