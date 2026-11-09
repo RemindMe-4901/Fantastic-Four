@@ -1,7 +1,7 @@
 <script setup>
-import Tasks from '@/component/Tasks.vue';
+import Task from '@/component/Tasks.vue';
 </script>
 
 <template>
-    <Tasks />
+    <Task />
 </template>
