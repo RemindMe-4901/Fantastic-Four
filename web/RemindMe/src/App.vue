@@ -1,22 +1,29 @@
 <script setup>
 //import Tasks from "./component/Tasks.vue";
 //import Home from ""
+import Spotify from "./component/Spotify.vue";
+import { BApp } from "bootstrap-vue-next";
+import {useRoute} from "vue-router"
+
+const route = useRoute();
 </script>
 
 <template>
-  <div id="app">
+  <BApp id="app">
 
-  <nav>
-    <router-link to="/">home</router-link> |
-    <router-link to="/createAccount">createAccount</router-link> |
-    <router-link to="/Login">Login</router-link> |
-    <router-link to="/Task">Task</router-link>
+  <!--<nav v-if="!$route.meta.hideNavBar" class = "navBar"> -->
+  <nav v-if= "route.meta.showNavBar != false">
+    <router-link to="/home">Home</router-link> | 
+    <router-link to="/Task">Tasks</router-link> |
+    <router-link to="/Habit">Habit</router-link> |
+    <router-link to="/TimerSession">Timer</router-link> |
+    <router-link to="/Spotify">Spotify</router-link>
   </nav>
 
-  <!--<Tasks />--> 
-  <Tasks />
+  <!--   --> 
+  <!--<Tasks /> <-- dont remember why I had this here to begin with, maybe need it??-->
   <router-view></router-view>
-  </div>
+</BApp>
 </template>
 
 <style>
