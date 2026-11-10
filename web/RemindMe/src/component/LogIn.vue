@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import { loginUser } from "../api/LogIn.js";
+import { loginUser, sendResetEmail } from "../api/LogIn.js";
 import { useRouter, useRoute } from 'vue-router';
 
 const email = ref("");
@@ -40,8 +40,11 @@ async function handleLogin() {
         return;
     }
 
-    loading.value = true;
-    setMessage("", "");
+loading.value = true;
+function setMessage(text, type) {
+    message.value = text;
+    messageType.value = type;
+}
 
     try {
         const test = await loginUser(email.value, password.value);
