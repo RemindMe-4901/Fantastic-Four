@@ -5,7 +5,7 @@ import {
   getTimerSessions,
   updateTimerSession,
   deleteTimerSession
-} from "../timerSessions.js";
+} from "../api/timerSessions.js";
 
 const sessions = ref([]);
 const duration = ref("");
