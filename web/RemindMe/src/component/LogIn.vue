@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import { loginUser, sendResetEmail } from "../api/LogIn.js";
+import { loginUser, sendResetEmail, emailHasAccount } from "../api/LogIn.js";
 import { useRouter, useRoute } from 'vue-router';
 
 const email = ref("");
@@ -12,6 +12,11 @@ const resetting = ref(false);
 
 const router = useRouter();
 const route = useRoute();
+
+function setMessage(text, type) {
+    message.value = text;
+    messageType.value = type;
+}
 
 function friendlyError(code) {
     switch (code) {
@@ -40,16 +45,19 @@ async function handleLogin() {
         return;
     }
 
-loading.value = true;
-function setMessage(text, type) {
-    message.value = text;
-    messageType.value = type;
-}
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email.value)) {
+        setMessage("That doesn't look like a valid email address.", "error");
+        return;
+    }
+
+    loading.value = true;
+    setMessage("", "");
 
     try {
         const test = await loginUser(email.value, password.value);
         sessionStorage.setItem("userInfo", test.user.uid);
-        router.push( route.query.redirect || '/Home');
+        router.push(route.query.redirect || '/Home');
     } catch (error) {
         setMessage(friendlyError(error.code), "error");
         password.value = "";
@@ -64,78 +72,88 @@ async function handleForgotPassword() {
         return;
     }
 
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email.value)) {
+        setMessage("That doesn't look like a valid email address.", "error");
+        return;
+    }
+
     resetting.value = true;
 
     try {
+        const exists = await emailHasAccount(email.value);
+
+        if (!exists) {
+            setMessage("There is no account with that email address.", "error");
+            return;
+        }
+
         await sendResetEmail(email.value);
         setMessage("Reset link sent. Check your inbox and spam folder.", "success");
     } catch (error) {
+        console.error("Reset error code:", error.code);
         if (error.code === "auth/invalid-email") {
             setMessage("Invalid email address.", "error");
         } else if (error.code === "auth/too-many-requests") {
             setMessage("Too many requests... Please wait a few minutes and try again.", "error");
         } else {
             setMessage("Couldn't send the reset email... Please try again.", "error");
+            //setMessage("Error: " + error.code, "error");
         }
     } finally {
         resetting.value = false;
     }
 }
 </script>
-    
+
 <template>
     <div class="login-page">
-        <h1>Welcome to ReadMe</h1>
-        <h2>Login to your ReadMe account</h2>
+        <div class="header-row">
+            <h1 class="brand">RemindMe</h1>
+            <h1>Login</h1>
+        </div>
 
-            <form @submit.prevent="handleLogin">
-            <label for="email">Email:</label>
-            <input
-                id="email"
-                type="email"
-                v-model="email"
-                placeholder="Enter your email"
-                required
-            />
+        <form @submit.prevent="handleLogin" novalidate>
+            <div class="field-row">
+                <input
+                    id="email"
+                    type="email"
+                    v-model="email"
+                    placeholder="email"
+                />
+                <button type="submit" class="submit-btn" :disabled="loading">
+                    {{ loading ? "Logging in..." : "Submit" }}
+                </button>
+            </div>
 
-            <label for="password">Password:</label>
-            <input
-                id="password"
-                type="password"
-                v-model="password"
-                placeholder="Enter your password"
-                required
-            />
-
-            <button type="submit" :disabled="loading">
-                {{ loading ? "Logging in..." : "Login" }}
-            </button>
+            <div class="field-row">
+                <input
+                    id="password"
+                    type="password"
+                    v-model="password"
+                    placeholder="password"
+                />
+                <button
+                    type="button"
+                    class="forgot-btn"
+                    @click="handleForgotPassword"
+                    :disabled="resetting"
+                >
+                    {{ resetting ? "Sending..." : "Forgot password" }}
+                </button>
+            </div>
         </form>
 
         <p v-if="message" :class="['message', messageType]" role="alert">
             {{ message }}
         </p>
 
-        <button
-            type="button"
-            class="forgot-btn"
-            @click="handleForgotPassword"
-            :disabled="resetting"
-        >
-            {{ resetting ? "Sending..." : "Forgot password?" }}
-        </button>
-
-        <h3>No Account? Click on "Create a new account" below!</h3>
-
         <router-link to="/createAccount">
-            <button role="link">
-                Create a new Account
+            <button type="button" class="create-btn">
+                Create Account
             </button>
-            
         </router-link>
-        
     </div>
-    
 </template>
 
 <style scoped>
