@@ -66,22 +66,27 @@ onMounted(() => {
   <div>
     <h1>Habits</h1>
 
-    <input
-      v-model="newHabit"
-      type="text"
-      placeholder="Enter a habit"
-    />
+    <form @submit.prevent="createHabit">
+      <input
+        v-model="newHabit"
+        type="text"
+        placeholder="Enter a habit"
+      />
 
-    <button @click="createHabit">
-      Add Habit
-    </button>
+      <button type="submit">
+        Add Habit
+      </button>
+    </form>
 
     <ul>
       <li v-for="habit in habits" :key="habit.id">
         {{ habit.name }} -
         {{ habit.completedToday ? "Completed Today" : "Not Completed" }}
 
-        <button @click="markComplete(habit.id)">
+        <button
+          v-if="!habit.completedToday"
+          @click="markComplete(habit.id)"
+        >
           Complete
         </button>
 
