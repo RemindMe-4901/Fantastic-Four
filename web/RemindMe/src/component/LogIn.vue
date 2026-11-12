@@ -85,7 +85,7 @@ async function handleForgotPassword() {
         const exists = await emailHasAccount(email.value);
 
         if (!exists) {
-            setMessage("There is no account with that email address.", "error");
+            setMessage("This email does not have an account.", "error");
             return;
         }
 
@@ -98,7 +98,7 @@ async function handleForgotPassword() {
         } else if (error.code === "auth/too-many-requests") {
             setMessage("Too many requests... Please wait a few minutes and try again.", "error");
         } else {
-            setMessage("That email does not have an account.", "error");
+            setMessage("Something went wrong... Please try again.", "error");
         }
     } finally {
         resetting.value = false;
