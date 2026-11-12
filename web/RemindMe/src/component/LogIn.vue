@@ -141,7 +141,7 @@ async function handleForgotPassword() {
 <style scoped>
 .login-page {
     min-height: 100vh;
-    background-color: #F4E9CD;
+    background-color: #fef7e5;
     padding: 60px 40px;
     box-sizing: border-box;
 }
@@ -195,7 +195,7 @@ input:focus {
     padding: 10px 24px;
     font-size: 1rem;
     background-color: #77ACA2;
-    color: #031926;
+    color: #ffffff;
     border: 1px solid #468189;
     border-radius: 4px;
     cursor: pointer;
@@ -228,7 +228,7 @@ input:focus {
     padding: 10px 24px;
     font-size: 1rem;
     background-color: #77ACA2;
-    color: #031926;
+    color: #ffffff;
     border: 1px solid #468189;
     border-radius: 4px;
     cursor: pointer;
