@@ -107,7 +107,6 @@ async function handleForgotPassword() {
                 </button>
             </div>
 
-            <!-- Password row: input + Forgot password side by side -->
             <div class="field-row">
                 <input
                     id="password"
