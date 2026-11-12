@@ -98,7 +98,7 @@ async function handleForgotPassword() {
             setMessage("Too many requests... Please wait a few minutes and try again.", "error");
         } else {
             setMessage("Couldn't send the reset email... Please try again.", "error");
-            //setMessage("Error: " + error.code, "error");
+            setMessage("Error: This email does not have an account.", "error");
         }
     } finally {
         resetting.value = false;
