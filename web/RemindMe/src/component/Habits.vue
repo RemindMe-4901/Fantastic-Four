@@ -5,7 +5,7 @@ import {
   getHabits,
   updateHabit,
   deleteHabit
-} from "../habits.js";
+} from "../api/habits.js";
 
 const habits = ref([]);
 const newHabit = ref("");
