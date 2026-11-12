@@ -57,21 +57,28 @@ onMounted(() => {
 <template>
   <div>
     <h1>Tasks</h1>
-<input
-  v-model="newTask"
-  type="text"
-  placeholder="Enter task name"
-/>
 
-<button @click="createTask">
-  Add Task
-</button>
+    <form @submit.prevent="createTask">
+      <input
+        v-model="newTask"
+        type="text"
+        placeholder="Enter task name"
+      />
+
+      <button type="submit">
+        Add Task
+      </button>
+    </form>
+
     <ul>
       <li v-for="task in tasks" :key="task.id">
         {{ task.title }} -
         {{ task.completed ? "Completed" : "Pending" }}
 
-        <button @click="markComplete(task.id)">
+        <button
+          v-if="!task.completed"
+          @click="markComplete(task.id)"
+        >
           Complete
         </button>
 
